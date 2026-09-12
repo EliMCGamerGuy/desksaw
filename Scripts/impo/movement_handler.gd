@@ -306,5 +306,3 @@ func ragdoll(val: bool):
 	else:
 		rigid.global_position.x = rigidtorso.global_position.x
 		rigid.global_position.y = rigidtorso.global_position.y
-
-

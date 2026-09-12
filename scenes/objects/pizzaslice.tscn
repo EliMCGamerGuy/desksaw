@@ -52,7 +52,7 @@ script = ExtResource("4_v7561")
 propertyTable = {
 "consumable": true,
 "danger": 0,
-"interest": 2,
+"interest": 6,
 "moodBoostIfConsumable": 1.5,
 "object": true,
 "replenishIfConsumable": 7.5,
