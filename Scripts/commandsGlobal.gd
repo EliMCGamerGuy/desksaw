@@ -41,9 +41,7 @@ func reload():
 
 
 func spawnExpie(petId: String = ""):
-	var path = "res://scenes/sawianBase.tscn"
-	var scene = load(path)
-	var instance = scene.instantiate()
+	var instance = preload("res://scenes/sawianBase.tscn").instantiate()
 
 	if petId == "":
 		var skinName = GlobalVariable.userSkinPath.substr(0, len(GlobalVariable.userSkinPath) - 1)
@@ -53,7 +51,14 @@ func spawnExpie(petId: String = ""):
 
 	var wrapper = Node2D.new()
 	wrapper.scale = Vector2(4.0, 4.0)
-
+	
+	#Update scale based on saved info or spawn setting
+	if gbData.data["saw"][petId].has("spawnSize"):
+		wrapper.scale*=gbData.data["saw"][petId]["spawnSize"]
+	else:
+		if gbData.settings.has("spawnSize"):
+			wrapper.scale*=gbData.settings["spawnSize"]
+		
 	get_tree().current_scene.add_child(wrapper)
 	wrapper.owner = get_tree().current_scene
 
