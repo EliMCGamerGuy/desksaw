@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="deskSaw"
-config/version="0.2.0"
 run/main_scene="uid://nbfrphs14wxt"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="deedee14/desksawPRE-RELEASE"
@@ -33,8 +32,8 @@ gbData="*uid://cxvm0bn8psfuw"
 GlobalVariable="*uid://mxghgdpm2n4c"
 TransparentWindow="*uid://cckj4pyg78xfg"
 AudioManager="*uid://kyyjq6geettk"
-LocalizationManager="*uid://0a2b28iblnmk"
 CommandsGlobal="*uid://cdrh1cuyfy75f"
+LocalizationManager="*uid://0a2b28iblnmk"
 
 [display]
 
@@ -102,7 +101,7 @@ testl={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://localization/localization.cs.translation", "res://localization/localization.en.translation")
+locale/translations=PackedStringArray("res://localization/localization.en.translation", "res://localization/localization.cs.translation")
 locale/translation_add_builtin_strings_to_pot=true
 
 [physics]

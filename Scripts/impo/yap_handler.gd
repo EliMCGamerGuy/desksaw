@@ -7,7 +7,7 @@ var turnPauseMin := 0.1
 var turnPauseMax := 0.5
 var tickTime := 0.5
 
-enum yapstates { idle, calling, responding, approaching, progressing, splitting }
+enum yapstates {idle, calling, responding, approaching, progressing, splitting}
 
 var state = yapstates.idle
 var partner
@@ -214,7 +214,7 @@ func _approachdrive(b):
 	if adx > 200.0:
 		b.moveSys.dir = sign(dx)
 	elif adx < 100.0:
-		b.moveSys.dir = -sign(dx)
+		b.moveSys.dir = - sign(dx)
 	else:
 		b.moveSys.dir = 0.0
 		rigid.linear_velocity.x = move_toward(rigid.linear_velocity.x, 0.0, randf_range(400.0, 600.0))
@@ -260,9 +260,13 @@ func _endLineDone(behavior) -> bool:
 		and rt.visible_characters >= rt.get_total_character_count()
 
 func _moodeffect(speaker, other):
+	## this wasnt rounded correctly!!!! 
 	var f = speaker.get_node("yapHandler").friendliness
 	var maxv = max(float(f % 10) / 2.0, 1.0)
 	var v = randf_range(1.0, maxv)
+	##round it this time
+
+	v = snapped(v, 0.1)
 	#higher friendliness means a bigger chance of raising their mood
 	var up = randf() * 100.0 < float(f)
 	if up:
@@ -354,7 +358,7 @@ func _startSplit(other):
 		dirx = -1.0 if isCaller else 1.0
 	var faceDir = dirx
 	if randf() < 0.5:
-		faceDir = -dirx
+		faceDir = - dirx
 	state = yapstates.splitting
 	walkDir = dirx
 	walkFaceDir = faceDir

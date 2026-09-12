@@ -789,6 +789,7 @@ layout_mode = 2
 text = "this is a long string of text to test this thing"
 
 [node name="ItemSpawner" type="Container" parent="Main" unique_id=445574113]
+visible = false
 clip_contents = true
 layout_mode = 1
 anchors_preset = 15
