@@ -72,7 +72,10 @@ func swapTex(sprite: Sprite2D, skinFileNames: Dictionary):
 		"name": file_name,
 		"texture": tex
 	}
-func loadUserTex(userPath: String):
+var textureCache:Dictionary[String, Texture2D]
+func loadUserTex(userPath: String)->Texture2D:
+	if textureCache.has(userPath):
+		return textureCache[userPath]
 	if not FileAccess.file_exists(userPath):
 		return null
 
@@ -81,13 +84,14 @@ func loadUserTex(userPath: String):
 	if userPath.begins_with("res:"):
 		return load(userPath)
 
-	var image = Image.new()
-	var loadResult = image.load(userPath)
-
-	if loadResult != OK:
+	
+	var image =Image.load_from_file(userPath)
+	if not image:
 		return null
-
-	return ImageTexture.create_from_image(image)
+		
+	var texture=ImageTexture.create_from_image(image)
+	textureCache[userPath]=texture
+	return texture
 
 func getspr(node: Node) -> Array:
 	var found = []

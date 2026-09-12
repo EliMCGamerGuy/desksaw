@@ -17,11 +17,12 @@ var console: Node
 func _ready():
 	DisplayServer.window_set_size(Vector2i(screenWidth, screenHeight) - Vector2i(1, 1))
 	DisplayServer.window_set_position(DisplayServer.screen_get_position())
+
 	if OS.get_name() == "Linux":
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
 
 	if OS.get_name() == "Linux" and OS.get_environment("XDG_SESSION_TYPE").to_lower() == "wayland" and not TransparentWindow.UsesInputRegions():
-		OS.alert("DeskSaw could not enable its XWayland input-region workaround. Click-through interaction may not work correctly. Make sure DeskSaw is running through X11/XWayland with the XShape extension available, or use an X11 session.")
+		OS.alert(tr("WAYLAND_DIALOG_MESSAGE"), tr("WAYLAND_DIALOG_TITLE"))
 
 	#fix()
 	createBorders()
@@ -45,7 +46,7 @@ func _ready():
 		gbData.data["firstLaunch"] = false
 		var method := RenderingServer.get_current_rendering_method()
 		var use_vulkan: bool = await GlobalVariable.makePopUp(
-			"This is your first time launching DeskSaw!\n\nWould you like to be linked to a guide on how to use it?",
+			tr("FIRST_LAUNCH_MESSAGE"),
 			$CanvasLayer2,
 			Vector2(screenWidth / 2, screenHeight / 2)
 		)

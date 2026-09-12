@@ -19,6 +19,7 @@ var skinData = []
 
 var template = "res://Scripts/singletons/SaveTemplate.json"
 
+var availableLanguages = []
 
 # DO NOT FORGET TO DISABLE THIS WHENBUILDING 
 var devMode = false
@@ -119,8 +120,11 @@ func addPet(skin: String = "Default") -> String:
 
 	data["saw"][newId] = data["sawTemplate"].duplicate(true)
 	data["saw"][newId]["skin"] = skin
-
-
+	if gbData.settings.has("spawnSize"):
+		data["saw"][newId]["spawnSize"]=gbData.settings["spawnSize"]
+	else:
+		data["saw"][newId]["spawnSize"]=1.0
+	
 	savetodisk(savePath, data)
 	return newId
 
